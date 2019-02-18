@@ -7,7 +7,7 @@ pipeline {
         sh 'java -version'
       }
     }
-    stage('Deploy') {
+    stage('Version Check') {
       options {
         timeout(time: 30, unit: 'SECONDS')
       }
@@ -24,6 +24,21 @@ v1.3''', description: 'What to deploy?')
         echo "Deploying ${APP_VERSION}."
       }
     }
+    stage('Checkpoint') {
+        agent none
+         steps {
+            checkpoint 'Checkpoint'
+         }
+      }
+    stage('Deploy') {
+         agent none
+         steps {
+            echo 'Deploying....'
+         }
+      }
+
+
+
   }
   environment {
     MY_NAME = 'Adam'
