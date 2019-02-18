@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Saye Hello') {
+    stage('Print') {
       steps {
         echo "Hello ${params.Name}!"
         sh 'java -version'
@@ -27,6 +27,13 @@ v1.3''', description: 'What to deploy?')
   }
   environment {
     MY_NAME = 'Adam'
+  }
+  post {
+    aborted {
+      echo 'Why didn\'t you push my button?'
+
+    }
+
   }
   parameters {
     string(name: 'Name', defaultValue: 'whoever you are', description: 'Who should I say hi to?')
