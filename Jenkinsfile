@@ -37,6 +37,11 @@ v1.3''', description: 'What to deploy?')
         echo 'Deploying....'
       }
     }
+    stage('Clean workspace') {
+      steps {
+        cleanWs(cleanWhenSuccess: true, cleanWhenAborted: true, cleanWhenFailure: true)
+      }
+    }
   }
   environment {
     MY_NAME = 'Adam'
