@@ -24,11 +24,6 @@ v1.3''', description: 'What to deploy?')
         echo "Deploying ${APP_VERSION}."
       }
     }
-    stage('Checkpoint') {
-         steps {
-            checkpoint 'Checkpoint'
-         }
-      }
     stage('Deploy') {
          steps {
             echo 'Deploying....'
