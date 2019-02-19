@@ -2,9 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Print') {
-      steps {
-        echo "Hello ${params.Name}!"
-        sh 'java -version'
+      parallel {
+        stage('Print') {
+          steps {
+            echo "Hello ${params.Name}!"
+          }
+        }
+        stage('Check') {
+          steps {
+            sh 'java -version'
+          }
+        }
       }
     }
     stage('Version Check') {
@@ -25,13 +33,10 @@ v1.3''', description: 'What to deploy?')
       }
     }
     stage('Deploy') {
-         steps {
-            echo 'Deploying....'
-         }
+      steps {
+        echo 'Deploying....'
       }
-
-
-
+    }
   }
   environment {
     MY_NAME = 'Adam'
